@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WoW Classic BiS Item Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 80%; margin: auto; }
+        input, select { margin: 10px; padding: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WoW Classic BiS Item Search</h1>
+        <input type="text" id="searchItem" placeholder="Search for an item..." onkeyup="filterItems()">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Source</th>
+                    <th>Classes</th>
+                    <th>Tier</th>
+                </tr>
+            </thead>
+            <tbody id="itemTable">
+                <!-- Items will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const bisItems = [
+            { name: "Choker of the Fire Lord", source: "Ragnaros - Molten Core", classes: "Mage, Warlock, Shadow Priest, Holy Paladin", tier: "S" },
+            { name: "Azuresong Mageblade", source: "Golemagg - Molten Core", classes: "Mage, Warlock, Holy Paladin", tier: "S" },
+            { name: "Perdition's Blade", source: "Ragnaros - Molten Core", classes: "Rogue, Dagger Fury Warrior", tier: "S" },
+            { name: "Bonereaver's Edge", source: "Ragnaros - Molten Core", classes: "Fury Warrior, Retribution Paladin", tier: "S" },
+            { name: "Band of Accuria", source: "Ragnaros - Molten Core", classes: "Rogue, Hunter, Warrior (DPS/Tank)", tier: "S" },
+            { name: "Bloodfang Hood", source: "Onyxia - Onyxia's Lair", classes: "Rogue", tier: "S" },
+            { name: "Nemesis Skullcap", source: "Onyxia - Onyxia's Lair", classes: "Warlock", tier: "S" },
+            { name: "Crown of Destruction", source: "Ragnaros - Molten Core", classes: "Hunter, Retribution Paladin", tier: "S" },
+            { name: "Striker's Mark", source: "Magmadar - Molten Core", classes: "Hunter, Rogue", tier: "S" },
+            { name: "Talisman of Ephemeral Power", source: "Multiple Bosses - Molten Core", classes: "Mage, Warlock, Shadow Priest", tier: "S" },
+            { name: "Hand of Justice", source: "General Angerforge - Blackrock Depths", classes: "Rogue, Fury Warrior, Feral Druid", tier: "A" },
+            { name: "Staff of Dominance", source: "Golemagg - Molten Core", classes: "Mage, Warlock, Druid Healer", tier: "S" },
+            { name: "Judgement Crown", source: "Onyxia - Onyxia's Lair", classes: "Paladin Healer", tier: "S" },
+            { name: "Wild Growth Spaulders", source: "Cache of the Firelord - Molten Core", classes: "Paladin Healer, Druid Healer", tier: "S" },
+            { name: "Flameguard Gauntlets", source: "Molten Core Trash", classes: "Warrior DPS, Paladin DPS", tier: "S" },
+            { name: "Onslaught Girdle", source: "Ragnaros - Molten Core", classes: "Warrior DPS", tier: "S" },
+            { name: "Core Hound Tooth", source: "Cache of the Firelord - Molten Core", classes: "Rogue, Feral Druid", tier: "S" },
+            { name: "Sash of Whispered Secrets", source: "Cache of the Firelord - Molten Core", classes: "Caster DPS", tier: "A" },
+            { name: "Quick Strike Ring", source: "Molten Core Trash", classes: "Melee DPS", tier: "A" },
+            { name: "Ring of Spell Power", source: "Molten Core Trash", classes: "Caster DPS", tier: "S" },
+            { name: "Mana Igniting Cord", source: "Molten Core Trash", classes: "Caster DPS", tier: "A" },
+            { name: "Staff of Dominance", source: "Golemagg - Molten Core", classes: "Mage, Warlock", tier: "S" },
+            { name: "Judgement Crown", source: "Onyxia - Onyxia's Lair", classes: "Paladin Healer", tier: "S" },
+            { name: "Aurastone Hammer", source: "Garr - Molten Core", classes: "Druid Healer, Holy Paladin", tier: "S" },
+            { name: "Salamander Scale Pants", source: "Molten Core Trash", classes: "Healers", tier: "A" },
+            { name: "Cauterizing Band", source: "Cache of the Firelord - Molten Core", classes: "Healers", tier: "A" },
+            { name: "Shard of the Scale", source: "Onyxia - Onyxia's Lair", classes: "Healers", tier: "A" }
+        ];
+
+        function filterItems() {
+            let input = document.getElementById("searchItem").value.toLowerCase();
+            let table = document.getElementById("itemTable");
+            table.innerHTML = ""; // Clear the table
+
+            bisItems.forEach(item => { // Corrected variable name
+                if (item.name.toLowerCase().includes(input) || item.classes.toLowerCase().includes(input)) {
+                    let row = `<tr>
+                        <td>${item.name}</td>
+                        <td>${item.source}</td>
+                        <td>${item.classes}</td>
+                        <td>${item.tier}</td>
+                    </tr>`;
+                    table.innerHTML += row;
+                }
+            });
+        }
+
+        // Populate the table initially
+        filterItems();
+    </script>
+</body>
+</html>
